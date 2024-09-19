@@ -41,6 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.claucio.dev.whatsclone.features.chatsList.ChatsListScreen
 import com.claucio.dev.whatsclone.ui.theme.WhatsCloneTheme
 
 class MainActivity : ComponentActivity() {
@@ -220,16 +221,6 @@ fun App() {
 }
 
 //Screen ------------------------------------------------------------------
-@Composable
-fun ChatsListScreen(modifier: Modifier = Modifier) {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(
-            text = "Chats List", style = TextStyle.Default.copy(
-                fontSize = 32.sp, color = Color.White
-            )
-        )
-    }
-}
 
 @Composable
 fun UpdateScreen(modifier: Modifier = Modifier) {
