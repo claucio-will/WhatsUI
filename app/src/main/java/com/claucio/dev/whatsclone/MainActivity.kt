@@ -39,10 +39,16 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.claucio.dev.whatsclone.features.chatsList.Chat
 import com.claucio.dev.whatsclone.features.chatsList.ChatsListScreen
+import com.claucio.dev.whatsclone.features.chatsList.ChatsListScreenState
+import com.claucio.dev.whatsclone.features.chatsList.Message
+import com.claucio.dev.whatsclone.features.chatsList.User
 import com.claucio.dev.whatsclone.ui.theme.WhatsCloneTheme
+import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -212,7 +218,23 @@ fun App() {
             val item = screens[page]
             when (item) {
                 ScreenItem.Call -> CallScreen()
-                ScreenItem.Chats -> ChatsListScreen()
+                ScreenItem.Chats -> ChatsListScreen(state = ChatsListScreenState(
+                    currentUser = User("Claucio"),
+                    listOf("All", "Unread", "Groups"),
+                    chats = List(10) {
+                        Chat(
+                            avatar = if (Random.nextBoolean()) "Avatar" else null,
+                            name = LoremIpsum(Random.nextInt(1, 20)).values.first(),
+                            lastMessage = Message(
+                                text = LoremIpsum(Random.nextInt(1, 20)).values.first(),
+                                date = "01/09/2024",
+                                isRead = true,
+                                author = if (Random.nextBoolean()) User("Claucio") else User("Other")
+                            ),
+                            unreadMessages = Random.nextInt(1, 20)
+                        )
+                    }
+                ))
                 ScreenItem.Communities -> CommunitiesScreen()
                 ScreenItem.Update -> UpdateScreen()
             }
